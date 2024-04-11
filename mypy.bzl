@@ -154,7 +154,7 @@ def _mypy_rule_impl(ctx, is_aspect = False):
         runfiles = runfiles.merge(ctx.attr._mypy_cli.default_runfiles)
 
     src_root_paths = sets.to_list(
-        sets.make([f.root.path for f in src_files]),
+        sets.make([f.root.path for f in src_files if not "bazel-out" in f.path]),
     )
 
     ctx.actions.expand_template(
