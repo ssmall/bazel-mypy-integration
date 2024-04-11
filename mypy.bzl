@@ -171,6 +171,7 @@ def _mypy_rule_impl(ctx, is_aspect = False):
             "{SRCS}": " ".join([
                 shell.quote(f.path) if is_aspect else shell.quote(f.short_path)
                 for f in src_files
+                if not "bazel-out" in f.path
             ]),
             "{VERBOSE_OPT}": "--verbose" if DEBUG else "",
             "{VERBOSE_BASH}": "set -x" if DEBUG else "",
